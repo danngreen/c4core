@@ -71,7 +71,9 @@ inline size_t to_chars(c4::substr buf, std::string const& s)
     {
         C4_ASSERT(s.data() != nullptr);
         C4_ASSERT(buf.str != nullptr);
-        memcpy(buf.str, s.data(), len);
+        // memcpy(buf.str, s.data(), len);
+        for (size_t i = 0; i < len; i++)
+            buf[i] = s[i];
     }
     return s.size(); // return the number of needed chars
 }
@@ -87,7 +89,9 @@ inline bool from_chars(c4::csubstr buf, std::string * s)
     if(buf.len)
     {
         C4_ASSERT(buf.str != nullptr);
-        memcpy(&(*s)[0], buf.str, buf.len);
+        // memcpy(&(*s)[0], buf.str, buf.len);
+        for (size_t i = 0; i < buf.len; i++)
+            (*s)[i] = buf[i];
     }
     return true;
 }
